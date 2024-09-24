@@ -2,51 +2,43 @@
 
 using namespace std;
 
-class DT{
-private:
-    float hd, td;
+class Diem{
+    int x, y;
 public:
-    DT(){}
-    DT(float hd1, float td1){
-        this->hd = hd1;
-        this->td = td1;
+    Diem() : x(0), y(0) {}
+    Diem(int x, int y){
+        this->x = x;
+        this->y = y;
     }
-    DT(const DT& T1){
-        hd = T1.hd;
-        td = T1.td;
+    double kc(Diem other){
+        return sqrt(pow(this->x - other.x, 2) + pow(this->y - other.y, 2));
     }
-    float kc1(){
-        return sqrt(pow(hd, 2) + pow(td, 2));
+    bool operator==(Diem other){
+        return (this->x == other.x && this->y == other.y);
     }
-    bool operator==(const DT& other){
-        if(this->hd == other.hd && this->td == other.td) return 1;
-        else return 0;
-    }
-    DT operator*(DT& other){
-        DT tmp;
-        tmp.hd = this->hd * other.hd;
-        tmp.td = this->td * other.td;
+    Diem operator*(Diem other){
+        Diem tmp;
+        tmp.x = this->x * other.x;
+        tmp.y = this->y * other.y;
         return tmp;
     }
-    friend ostream& operator<<(ostream& os, DT& tmp){
-        os << "(" << tmp.hd << ";" << tmp.td << ")";
+    friend ostream& operator<<(ostream& os, Diem& other){
+        os << "(" << other.x << ", " << other.y << ")";
         return os;
     }
-    friend istream& operator>>(istream& is, DT& tmp){
-        is >> tmp.hd >> tmp.td;
+    friend istream& operator>>(istream& is, Diem& other){
+        is >> other.x >> other.y;
         return is;
     }
-    ~DT(){}
 };
 
 int main(){
-    DT x, y;
-    cin >> x >> y;
-    cout << x << endl << y;
-    cout << "\nKhoang cach cua diem x la: " << x.kc1() << endl;
-    if(x == y) cout << "2 diem x va y bang nhau" << endl;
-    else cout << "2 diem x va y khong bang nhau" << endl;
-    DT tmp = x * y;
-    cout << "x * y = " << tmp;
-    return 0;
+    Diem a, b, c;
+    cin >> a;
+    cin >> b;
+    cout << a << endl << b << endl;
+    c = a * b;
+    cout << c << endl;
+    if(a == b) cout << "Hai diem bang nhau" << endl;
+    else cout << "Hai diem khong bang nhau" << endl;
 }
